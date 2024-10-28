@@ -1,1 +1,45 @@
-<h1> This is page is under construction. </h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Homelab</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        async function loadContent() {
+            const sections = ['about', 'projects', 'tutorials', 'contact'];
+            for (const section of sections) {
+                const response = await fetch(`${section}.html`);
+                const content = await response.text();
+                document.getElementById(section).innerHTML = content;
+            }
+        }
+
+        window.onload = loadContent;
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Welcome to My Homelab</h1>
+        <nav>
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#tutorials">Tutorials</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about"></section>
+        <section id="projects"></section>
+        <section id="tutorials"></section>
+        <section id="contact"></section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 My Homelab. All rights reserved.</p>
+    </footer>
+</body>
+</html>
