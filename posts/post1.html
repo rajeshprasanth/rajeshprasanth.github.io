@@ -1,0 +1,46 @@
+<h1 id="ansible-playbook-clone-git-repository">Ansible Playbook: Clone Git Repository (27/February/2025)</h1>
+<h2 id="overview">Overview</h2>
+<p>This Ansible playbook automates the process of cloning a Git repository onto a target system. It ensures that Git is installed, creates the destination directory if it does not exist, and then clones the repository.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Ansible installed on the control machine</li>
+<li>SSH access to the target machine</li>
+<li>The target machine must be defined in the Ansible inventory</li>
+<li>Git must be available in the package manager of the target machine</li>
+</ul>
+<h2 id="variables">Variables</h2>
+<ul>
+<li><code>repo_url</code>: The URL of the Git repository to be cloned.</li>
+<li><code>dest_path</code>: The directory where the repository will be cloned.</li>
+</ul>
+<h2 id="playbook-structure">Playbook Structure</h2>
+<p>The playbook performs the following steps:</p>
+<ol>
+<li>Ensures Git is installed on the target system.</li>
+<li>Creates the destination directory if it does not exist.</li>
+<li>Clones the specified Git repository into the destination directory.</li>
+</ol>
+<h2 id="running-the-playbook">Running the Playbook</h2>
+<p>To execute the playbook against a specific host, use the following command:</p>
+<pre><code class="lang-bash">ansible-playbook playbook<span class="hljs-selector-class">.yml</span> --limit your_target_host
+</code></pre>
+<p>Replace <code>your_target_host</code> with the actual hostname or group defined in the inventory.</p>
+<p>If an inventory file is used, specify it explicitly:</p>
+<pre><code class="lang-bash">ansible-playbook -<span class="hljs-selector-tag">i</span> inventory<span class="hljs-selector-class">.ini</span> playbook<span class="hljs-selector-class">.yml</span> --limit your_target_host
+</code></pre>
+<h2 id="customizing-the-playbook">Customizing the Playbook</h2>
+<p>Modify the <code>vars</code> section in the playbook to specify a different repository URL or destination directory:</p>
+<pre><code class="lang-yaml"><span class="hljs-symbol">vars:</span>
+<span class="hljs-symbol">  repo_url:</span> <span class="hljs-string">"https://github.com/example/repository.git"</span>
+<span class="hljs-symbol">  dest_path:</span> <span class="hljs-string">"/opt/project"</span>
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li>Ensure SSH connectivity to the target host.</li>
+<li>Verify that Git is available in the package manager (<code>yum</code>, <code>apt</code>, <code>dnf</code>, etc.).</li>
+<li>Check Ansible logs for errors using the <code>-vvv</code> flag for detailed output:<pre><code class="lang-bash">ansible-playbook playbook<span class="hljs-selector-class">.yml</span> --limit your_target_host -vvv
+</code></pre>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This playbook provides an automated way to set up and maintain Git repositories on remote systems. Adjust variables and inventory settings as needed to fit your environment.</p>
