@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <script>
         async function loadContent() {
-            const sections = ['about', 'projects', 'tutorials', 'contact'];
+            const sections = ['about', 'blogs','projects', 'tutorials', 'contact'];
             for (const section of sections) {
                 const response = await fetch(`${section}.html`);
                 const content = await response.text();
@@ -24,6 +24,7 @@
         <nav>
             <ul>
                 <li><a href="#about">About</a></li>
+                <li><a href="#blogs">About</a></li>
                 <li><a href="#projects">Projects</a></li>
                 <li><a href="#tutorials">Tutorials</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -33,13 +34,14 @@
 
     <main>
         <section id="about"></section>
+        <section id="blogs"></section>
         <section id="projects"></section>
         <section id="tutorials"></section>
         <section id="contact"></section>
     </main>
 
     <footer>
-        <p>&copy; 2024 My Homelab. All rights reserved.</p>
+        <p>&copy; 2025 My Homelab. All rights reserved.</p>
     </footer>
 </body>
 </html>
