@@ -1,0 +1,49 @@
+<h1 id="user-manual-for-ansible-playbook-install-essential-packages-on-fedora">Ansible Playbook: Install Essential Packages on Fedora</h1>
+<h2 id="overview">Overview</h2>
+<p>This Ansible playbook automates the installation of essential packages (<code>htop</code>, <code>mailx</code>, and <code>git</code>) on Fedora-based systems. It ensures that the package repository is updated before installing the required software.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Ansible installed on the control machine.</li>
+<li>SSH access to the target machines.</li>
+<li>Target machines must be Fedora-based.</li>
+<li>Sudo privileges on the target machines.</li>
+</ul>
+<h2 id="playbook-structure">Playbook Structure</h2>
+<p>The playbook executes the following tasks:</p>
+<ol>
+<li>Updates the package repository to ensure the latest package versions are available.</li>
+<li>Installs <code>htop</code>, <code>mailx</code>, and <code>git</code> in a single task for efficiency.</li>
+</ol>
+<h2 id="running-the-playbook">Running the Playbook</h2>
+<p>To execute the playbook against all hosts:</p>
+<pre><code class="lang-bash"><span class="hljs-selector-tag">ansible-playbook</span> <span class="hljs-selector-tag">install_base_packages</span><span class="hljs-selector-class">.yml</span>
+</code></pre>
+<p>To run it against a specific host or group:</p>
+<pre><code class="lang-bash">ansible-playbook install_base_packages<span class="hljs-selector-class">.yml</span> --limit your_target_host
+</code></pre>
+<p>Replace <code>your_target_host</code> with the actual hostname or group defined in your inventory.</p>
+<p>If using a custom inventory file, specify it explicitly:</p>
+<pre><code class="lang-bash">ansible-playbook -<span class="hljs-selector-tag">i</span> inventory<span class="hljs-selector-class">.ini</span> install_base_packages.yml
+</code></pre>
+<h2 id="customization">Customization</h2>
+<p>If additional packages are needed, modify the <code>name</code> list in the playbook:</p>
+<pre><code class="lang-yaml">-<span class="ruby"> <span class="hljs-symbol">name:</span> Install essential packages
+</span>  ansible.builtin.dnf:
+    name:
+      -<span class="ruby"> htop
+</span>      -<span class="ruby"> mailx
+</span>      -<span class="ruby"> git
+</span>      -<span class="ruby"> vim  <span class="hljs-comment"># Example additional package</span>
+</span>    state: present
+</code></pre>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<ul>
+<li><strong>SSH connectivity issues</strong>: Ensure the target machine is accessible via SSH.</li>
+<li><strong>Sudo permissions</strong>: Verify the user running Ansible has <code>sudo</code> privileges on the target machine.</li>
+<li><strong>Package manager issues</strong>: If installation fails, manually check <code>dnf</code> on the target machine:<pre><code class="lang-bash">sudo dnf <span class="hljs-keyword">update</span> -<span class="hljs-built_in">y</span>
+sudo dnf install htop mailx git -<span class="hljs-built_in">y</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>This playbook provides an automated way to install essential packages on Fedora. Modify the package list as needed to fit your requirements.</p>
